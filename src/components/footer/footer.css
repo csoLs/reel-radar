@@ -1,0 +1,20 @@
+footer {
+  width: 100vw;
+  background: #ccc;
+  text-align: center;
+  padding: 2rem 0 4rem;
+}
+
+footer h5 {
+  margin-bottom: 1rem;
+}
+
+footer img {
+  width: 12rem;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+footer img:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
