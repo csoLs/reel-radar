@@ -2,6 +2,7 @@ import React from 'react';
 import useAxios from 'axios-hooks';
 
 import useApiConfig from '../../hooks/api-config'
+import useLocalStorage from '../../hooks/use-local-storage';
 
 import Votes from '../votes';
 
@@ -38,9 +39,40 @@ interface IMovie {
   vote_average: number
 }
 
+const Movie: React.FC<{
+  movie: IMovie,
+  posterPath: string,
+  later: number[],
+  favorite: number[],
+  setLater: (later: number[]) => void,
+  setFavorite: (favorites: number[]) => void}
+> = ({ movie, posterPath, favorite, setFavorite, later, setLater }) => {
+  return (
+    <div className="movie-row">
+      {(posterPath && movie.poster_path) ? (
+        <img src={`${posterPath}${movie.poster_path}`} />
+      ) : <img src="https://via.placeholder.com/92x138?text=" />}
+      <div>
+        <h3>{movie.original_title}<span className="year">{truncate(movie.release_date, 4, false)}</span></h3>
+        <Votes average={movie.vote_average} votes={movie.vote_count} />
+        <p>{truncate(movie.overview)}</p>
+      </div>
+
+      <button onClick={() => later.includes(movie.id) ? setLater(later.filter(m => m !== movie.id)) : setLater([...later, movie.id])}>
+        {later.includes(movie.id) ? 'Remove from watch list' :  'Add to watch list'}
+      </button>
+      <button onClick={() => favorite.includes(movie.id) ? setFavorite(favorite.filter(m => m !== movie.id)) : setFavorite([...favorite, movie.id])}>
+        {favorite.includes(movie.id) ? 'Remove from favorite' :  'Add to favorite'}
+      </button>
+    </div>
+  )
+}
+
 const Search: React.FC = () => {
   const { data: apiData } = useApiConfig()
   const [search, setSearch] = React.useState("")
+  const [watchLater, setWatchLater] = useLocalStorage<number[]>("watchLater", [])
+  const [favorite, setFavorite] = useLocalStorage<number[]>("favorite", [])
 
   const [{ loading, error, data }] = useAxios({
     url: `https://api.themoviedb.org/3/search/movie?query=${search}`,
@@ -63,16 +95,15 @@ const Search: React.FC = () => {
       ) : error ? (
         `Error searching for ${search}`
       ) : search != '' && (data?.results ?? []).length > 0 ? (data?.results ?? []).map((movie: IMovie) => (
-        <div className="movie-row" key={movie.id}>
-          {(apiData && movie.poster_path) ? (
-            <img src={`${apiData?.images?.base_url}${apiData?.images?.poster_sizes?.[0]}${movie.poster_path}`} />
-          ) : <img src="https://via.placeholder.com/92x138?text=" />}
-          <div>
-            <h3>{movie.original_title}<span className="year">{truncate(movie.release_date, 4, false)}</span></h3>
-            <Votes average={movie.vote_average} votes={movie.vote_count} />
-            <p>{truncate(movie.overview)}</p>
-          </div>
-        </div>
+        <Movie
+          key={movie.id}
+          movie={movie}
+          posterPath={`${apiData?.images?.base_url}${apiData?.images?.poster_sizes?.[0]}`}
+          later={watchLater}
+          favorite={favorite}
+          setFavorite={setFavorite}
+          setLater={setWatchLater}
+        />
       )) : null}
     </div>
   )
