@@ -13,9 +13,9 @@ const debounce = (fn: Function, ms = 600) => {
   };
 };
 
-const truncate = (str: string, length = 300) => {
+const truncate = (str: string, length = 250, appendEllipsis = true) => {
   if (str.length > length) {
-    return str.slice(0, length) + '…'
+    return `${str.slice(0, length)}${appendEllipsis ? '…' : ''}`
   } else return str;
 }
 
@@ -35,6 +35,13 @@ interface IMovie {
   video: boolean
   vote_average: number
 }
+
+const Votes: React.FC<{average: number, votes: number}> = ({average, votes}) => (
+  <div className="votes" title={`${average}/10 with ${votes} votes`}>
+    🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬
+    <span style={{ left: `${(average/10)*100}%` }} />
+  </div>
+)
 
 const Search: React.FC = () => {
   const { data: apiData } = useApiConfig()
@@ -66,7 +73,8 @@ const Search: React.FC = () => {
             <img src={`${apiData?.images?.base_url}${apiData?.images?.poster_sizes?.[0]}${movie.poster_path}`} />
           ) : <img src="https://via.placeholder.com/92x138?text=" />}
           <div>
-            <h3>{movie.original_title} ◎ {movie.vote_average}/10 with {movie.vote_count} votes</h3>
+            <h3>{movie.original_title}<span className="year">{truncate(movie.release_date, 4, false)}</span></h3>
+            <Votes average={movie.vote_average} votes={movie.vote_count} />
             <p>{truncate(movie.overview)}</p>
           </div>
         </div>

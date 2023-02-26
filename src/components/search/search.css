@@ -17,10 +17,36 @@
   flex-flow: row nowrap;
   margin: .75rem 0;
   border-radius: 10px;
-  box-shadow: 0 0 20px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 2 8px 0 rgba(0,0,0,0.1);
   overflow: hidden;
 }
 
 .movie-row > div {
-  padding: 0 .75rem;
+  padding: .75rem;
+}
+
+.movie-row p,
+.movie-row h3 {
+  margin: 0;
+}
+
+.movie-row .year {
+  font-size: .8rem;
+  margin-left: 1rem;
+  color: rgba(100,100,100,0.5);
+}
+
+
+.votes {
+  position: relative;
+  display: inline-block;
+  cursor: url('favicon_io/favicon-32x32.png'), auto;
+}
+.votes span {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255,255,255,0.9);
 }
