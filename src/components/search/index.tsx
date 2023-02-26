@@ -3,6 +3,8 @@ import useAxios from 'axios-hooks';
 
 import useApiConfig from '../../hooks/api-config'
 
+import './search.css'
+
 const debounce = (fn: Function, ms = 600) => {
   let timeoutId: ReturnType<typeof setTimeout>;
   return function (this: any, ...args: any[]) {

@@ -14,6 +14,8 @@ const App: React.FC = () => {
 
       <div className="App">
         <Search />
+
+        <hr />
         <PopularMovies />
       </div>
 

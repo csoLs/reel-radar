@@ -6,9 +6,12 @@ const Header: React.FC = () => (
   <header>
     <div>
       <a href="/">
-        <img src="/favicon_io/android-chrome-192x192.png" className="logo" alt="Vite logo" />
+        <img src="/favicon_io/android-chrome-192x192.png" className="logo" alt="ReelRadar logo" />
       </a>
-      <h1>ReelRadar</h1>
+      <div>
+        <h1>ReelRadar</h1>
+        <h3>Explore the world of movies</h3>
+      </div>
     </div>
   </header>
 )
