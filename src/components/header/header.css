@@ -1,6 +1,7 @@
 header {
   width: 100vw;
-  background: #ccc;
+  background: rgb(30, 67, 95, .7);
+  color: rgba(255,255,255,.7);
 }
 
 header > div {
