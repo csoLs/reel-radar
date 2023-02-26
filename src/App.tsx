@@ -2,7 +2,6 @@ import React from 'react'
 
 import Header from './components/header';
 import Footer from './components/footer';
-import PopularMovies from './components/popular';
 import Search from './components/search';
 
 import './App.css'
@@ -14,9 +13,6 @@ const App: React.FC = () => {
 
       <div className="App">
         <Search />
-
-        <hr />
-        <PopularMovies />
       </div>
 
       <Footer />

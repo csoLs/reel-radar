@@ -3,6 +3,8 @@ import useAxios from 'axios-hooks';
 
 import useApiConfig from '../../hooks/api-config'
 
+import Votes from '../votes';
+
 import './search.css'
 
 const debounce = (fn: Function, ms = 600) => {
@@ -35,13 +37,6 @@ interface IMovie {
   video: boolean
   vote_average: number
 }
-
-const Votes: React.FC<{average: number, votes: number}> = ({average, votes}) => (
-  <div className="votes" title={`${average}/10 with ${votes} votes`}>
-    🎬🎬🎬🎬🎬🎬🎬🎬🎬🎬
-    <span style={{ left: `${(average/10)*100}%` }} />
-  </div>
-)
 
 const Search: React.FC = () => {
   const { data: apiData } = useApiConfig()
