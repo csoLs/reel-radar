@@ -1,8 +1,9 @@
 footer {
   width: 100vw;
-  background: #ccc;
+  background: rgb(30, 67, 95, .7);
   text-align: center;
   padding: 2rem 0 4rem;
+  color: rgba(255,255,255,.7);
 }
 
 footer h5 {
@@ -13,8 +14,15 @@ footer img {
   width: 12rem;
   will-change: filter;
   transition: filter 300ms;
+  margin-bottom: 1rem;
 }
 
 footer img:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+footer p {
+  font-size: .8rem;
+  font-style: italic;
+  margin: 0;
 }
