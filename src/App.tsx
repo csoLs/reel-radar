@@ -1,23 +1,22 @@
-import { useState } from 'react'
+import React from 'react'
+
+import Header from './components/header';
+import Footer from './components/footer';
+import Search from './components/search';
 
 import './App.css'
 
-import PopularMovies from './components/popular';
-import Search from './components/search';
-
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <div>
-        <a href="/">
-          <img src="/favicon_io/android-chrome-192x192.png" className="logo" alt="Vite logo" />
-        </a>
-      </div>
-      <h1>ReelRadar</h1>
+    <>
+      <Header />
 
-      <Search />
-      <PopularMovies />
-    </div>
+      <div className="App">
+        <Search />
+      </div>
+
+      <Footer />
+    </>
   )
 }
 
