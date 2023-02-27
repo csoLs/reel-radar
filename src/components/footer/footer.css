@@ -1,8 +1,12 @@
 footer {
+  z-index: 9001;
+  position: fixed;
+  bottom: 0;
   width: 100vw;
-  background: rgb(30, 67, 95, .7);
+  height: 150px;
+  background: rgb(100, 123, 143);
   text-align: center;
-  padding: 2rem 0 4rem;
+  padding: 1rem;
   color: rgba(255,255,255,.7);
 }
 
@@ -25,4 +29,23 @@ footer p {
   font-size: .8rem;
   font-style: italic;
   margin: 0;
+}
+
+@media screen and (max-width: 720px) {
+  footer {
+    height: 100px;
+  }
+
+  footer h5 {
+    margin: 0rem;
+  }
+
+  footer img {
+    width: 6rem;
+    margin-bottom: 0rem;
+  }
+
+  footer p {
+    font-size: .7rem;
+  }
 }

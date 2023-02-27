@@ -1,6 +1,10 @@
 header {
+  z-index: 9001;
   width: 100vw;
-  background: rgb(30, 67, 95, .7);
+  height: 150px;
+  position: fixed;
+  top: 0;
+  background: rgb(100, 123, 143);
   color: rgba(255,255,255,.7);
 }
 
@@ -16,4 +20,22 @@ header > div {
 header h1,
 header h3 {
   margin: 0;
+}
+
+@media screen and (max-width: 720px) {
+  header {
+    height: 100px;
+  }
+
+  header > div {
+    padding: .5rem 1rem;
+  }
+
+  header .logo {
+    height: 70px;
+    margin-right: 1rem;
+  }
+
+  header h1 { font-size: 2rem; }
+  header h3 { font-size: 1rem; }
 }

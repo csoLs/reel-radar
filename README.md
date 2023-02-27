@@ -6,7 +6,7 @@ Proof of concept movie searching frontend
 
 - [X] Start by creating a git repository and a new React project,
   - [X] and don’t forget to give it a cool name.
-- [ ] The app must look good in desktop as well as mobile.
+- [X] The app must look good in desktop as well as mobile.
 - [X] A search field and like a table for showing the result.
 - [X] It should also have functionality for setting movies as your favourites, maybe with a star symbol in the table.
 - [X] A list where you can add movies you want to watch, like the “watch later” functionality o YouTube.

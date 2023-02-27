@@ -4,7 +4,7 @@ import useAxios from 'axios-hooks';
 import useApiConfig from '../../hooks/api-config'
 import useLocalStorage from '../../hooks/use-local-storage';
 
-import Votes from '../votes';
+import Movie, { IMovie } from '../movie';
 
 import './search.css'
 
@@ -15,58 +15,6 @@ const debounce = (fn: Function, ms = 600) => {
     timeoutId = setTimeout(() => fn.apply(this, args), ms);
   };
 };
-
-const truncate = (str: string, length = 250, appendEllipsis = true) => {
-  if (str.length > length) {
-    return `${str.slice(0, length)}${appendEllipsis ? '…' : ''}`
-  } else return str;
-}
-
-interface IMovie {
-  poster_path: string
-  adult: boolean
-  overview: string
-  release_date: string
-  genre_ids: number[]
-  id: number
-  original_title: string
-  original_language: string
-  title: string
-  backdrop_path: string
-  popularity: number
-  vote_count: number
-  video: boolean
-  vote_average: number
-}
-
-const Movie: React.FC<{
-  movie: IMovie,
-  posterPath: string,
-  later: number[],
-  favorite: number[],
-  setLater: (later: number[]) => void,
-  setFavorite: (favorites: number[]) => void}
-> = ({ movie, posterPath, favorite, setFavorite, later, setLater }) => {
-  return (
-    <div className="movie-row">
-      {(posterPath && movie.poster_path) ? (
-        <img src={`${posterPath}${movie.poster_path}`} />
-      ) : <img src="https://via.placeholder.com/92x138?text=" />}
-      <div>
-        <h3>{movie.original_title}<span className="year">{truncate(movie.release_date, 4, false)}</span></h3>
-        <Votes average={movie.vote_average} votes={movie.vote_count} />
-        <p>{truncate(movie.overview)}</p>
-      </div>
-
-      <button onClick={() => later.includes(movie.id) ? setLater(later.filter(m => m !== movie.id)) : setLater([...later, movie.id])}>
-        {later.includes(movie.id) ? 'Remove from watch list' :  'Add to watch list'}
-      </button>
-      <button onClick={() => favorite.includes(movie.id) ? setFavorite(favorite.filter(m => m !== movie.id)) : setFavorite([...favorite, movie.id])}>
-        {favorite.includes(movie.id) ? 'Remove from favorite' :  'Add to favorite'}
-      </button>
-    </div>
-  )
-}
 
 const Search: React.FC = () => {
   const { data: apiData } = useApiConfig()
@@ -89,8 +37,10 @@ const Search: React.FC = () => {
 
   return (
     <div>
-      <input className="searchInput" onChange={debouncedSetSearch} type="search" placeholder="Search for a movie…" />
-      {loading ? (
+      <div className='searchContainer'>
+        <input className="searchInput" onChange={debouncedSetSearch} type="search" placeholder="Search for a movie…" />
+      </div>
+      {search && loading ? (
         'Loading…'
       ) : error ? (
         `Error searching for ${search}`
