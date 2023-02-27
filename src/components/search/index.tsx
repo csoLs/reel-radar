@@ -22,7 +22,7 @@ const Search: React.FC = () => {
   const [watchLater, setWatchLater] = useLocalStorage<number[]>("watchLater", [])
   const [favorite, setFavorite] = useLocalStorage<number[]>("favorite", [])
 
-  const [{ loading, error, data }] = useAxios({
+  const [{ loading, error, data }] = useAxios<{results:IMovie[]}>({
     url: `https://api.themoviedb.org/3/search/movie?query=${search}`,
     headers: {
       authorization: `Bearer ${environment.ACCESS_TOKEN}`
@@ -44,7 +44,7 @@ const Search: React.FC = () => {
         'Loading…'
       ) : error ? (
         `Error searching for ${search}`
-      ) : search != '' && (data?.results ?? []).length > 0 ? (data?.results ?? []).map((movie: IMovie) => (
+      ) : search != '' && (data?.results ?? []).length > 0 ? (data?.results ?? []).map((movie) => (
         <Movie
           key={movie.id}
           movie={movie}
