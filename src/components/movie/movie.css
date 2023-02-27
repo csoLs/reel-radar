@@ -1,0 +1,106 @@
+.movie {
+  border: 1px solid rgba(50,50,50,0.2);
+  display: flex;
+  flex-flow: row nowrap;
+  margin: .75rem 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.movie button {
+  color: #ccc;
+  font-weight: 800;
+  font-size: 1.5rem;
+  padding: 0;
+  background: none;
+  border: 3px solid rgba(0,0,0,0);
+  margin-right: .5rem;
+  text-align: center;
+  line-height: 1rem;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+.movie button:focus {
+  outline: none;
+}
+.later.active {
+  color: #dac526;
+}
+.favorite.active {
+  color: #d34040;
+}
+.later {
+  left: 40px;
+}
+.favorite:hover {
+  border: 3px solid #d34040;
+  color: #d34040
+}
+.later:hover {
+  border: 3px solid #dac526;
+  color: #dac526;
+}
+.movie button span {
+  display: none;
+}
+
+.cta {
+  display: inline-block;
+}
+
+.movie img {
+  height: 150px;
+  width: 100px;
+}
+
+.movie > div {
+  padding: .75rem;
+}
+
+.movie p,
+.movie h3 {
+  margin: 0;
+}
+
+.movie .year {
+  font-size: .8rem;
+  margin-left: 1rem;
+  color: rgba(100,100,100,0.5);
+}
+
+@media screen and (max-width: 720px) {
+  .movie {
+    position: relative;
+  }
+
+  .movie img {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .movie .meta {
+    margin-left: 100px;
+    min-height: calc(150px - 1rem);
+  }
+  .description {
+    font-size: .9rem;
+    padding-top: 1rem;
+  }
+
+  .movie button span {
+    margin-left: .5rem;
+    display: inline;
+    font-size: .8rem;
+  }
+
+  .movie button {
+    margin-right: 0;
+    width: auto;
+    border-radius: 10px;
+    padding: 0 .5rem;
+    border-width: 1px !important;
+  }
+}
