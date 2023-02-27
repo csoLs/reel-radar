@@ -7,7 +7,7 @@ import Search from '../../components/search';
 const SearchPage: React.FC = () => {
   return (
     <>
-      <Header />
+      <Header active="home" />
 
       <div className="App">
         <Search />

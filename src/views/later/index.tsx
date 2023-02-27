@@ -6,7 +6,7 @@ import Footer from '../../components/footer';
 const LaterPage: React.FC = () => {
   return (
     <>
-      <Header />
+      <Header active="watchlist" />
 
       <div className="App">
         'later'

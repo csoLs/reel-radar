@@ -6,7 +6,7 @@ import Footer from '../../components/footer';
 const FavoritesPage: React.FC = () => {
   return (
     <>
-      <Header />
+      <Header active="favorites" />
 
       <div className="App">
         'favorites'
