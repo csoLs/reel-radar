@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 
-settings.js
+/public/settings.js

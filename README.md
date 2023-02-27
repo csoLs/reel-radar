@@ -17,7 +17,7 @@ Proof of concept movie searching frontend
 
 ## Setup
 
-Create a settings.js file in root with the following content:
+Create a settings.js file in public folder with the following content:
 ```
 const environment = {
   ACCESS_TOKEN: <TMDB_V4_API_KEY>,
