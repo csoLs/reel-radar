@@ -1,3 +1,13 @@
+.searchContainer {
+  position: sticky;
+  top: 150px;
+  z-index: 9000;
+  padding-bottom: 2rem;
+
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 30%, rgba(255,255,255,0) 100%);
+}
+
 .searchInput {
   width: 100%;
   height: 3rem;
@@ -5,20 +15,41 @@
   border: 1px solid #ccc;
   padding: 0 2rem;
   color: #777;
-  margin-bottom: 2rem;
 }
 .searchInput:focus-visible {
   outline: none;
 }
 
 .movie-row {
-  border: 1px solid rgba(100,100,100,0.2);
+  border: 1px solid rgba(50,50,50,0.2);
   display: flex;
   flex-flow: row nowrap;
   margin: .75rem 0;
   border-radius: 10px;
   box-shadow: 0 2 8px 0 rgba(0,0,0,0.1);
   overflow: hidden;
+  position: relative;
+}
+
+.movie-row button {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  padding: 0;
+  background: none;
+  border: none;
+}
+.movie-row button:nth-of-type(2) {
+  left: 40px;
+}
+.movie-row button:hover {
+  border: 1px solid #ccc;
+}
+
+.movie-row img {
+  height: 150px;
+  width: 100px;
+  border-right: 1px solid rgba(50,50,50,0.2);
 }
 
 .movie-row > div {
@@ -34,4 +65,22 @@
   font-size: .8rem;
   margin-left: 1rem;
   color: rgba(100,100,100,0.5);
+}
+
+.movie-row button {
+  color: #ccc;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+.movie-row button.starred {
+  color: #d34040;
+}
+.movie-row button.watchLater {
+  color: #dac526;
+}
+
+@media screen and (max-width: 720px) {
+  .searchContainer {
+    top: 100px;
+  }
 }

@@ -51,18 +51,18 @@ const Movie: React.FC<{
     <div className="movie-row">
       {(posterPath && movie.poster_path) ? (
         <img src={`${posterPath}${movie.poster_path}`} />
-      ) : <img src="https://via.placeholder.com/92x138?text=" />}
+      ) : <img src="https://via.placeholder.com/100x150?text=" />}
       <div>
         <h3>{movie.original_title}<span className="year">{truncate(movie.release_date, 4, false)}</span></h3>
         <Votes average={movie.vote_average} votes={movie.vote_count} />
         <p>{truncate(movie.overview)}</p>
       </div>
 
-      <button onClick={() => later.includes(movie.id) ? setLater(later.filter(m => m !== movie.id)) : setLater([...later, movie.id])}>
-        {later.includes(movie.id) ? 'Remove from watch list' :  'Add to watch list'}
+      <button title={later.includes(movie.id) ? 'Remove from watch list' :  'Add to watch list'} className={later.includes(movie.id) ? 'watchLater' : ''} onClick={() => later.includes(movie.id) ? setLater(later.filter(m => m !== movie.id)) : setLater([...later, movie.id])}>
+        {later.includes(movie.id) ? '−' : '+'}
       </button>
-      <button onClick={() => favorite.includes(movie.id) ? setFavorite(favorite.filter(m => m !== movie.id)) : setFavorite([...favorite, movie.id])}>
-        {favorite.includes(movie.id) ? 'Remove from favorite' :  'Add to favorite'}
+      <button title={favorite.includes(movie.id) ? 'Remove from favorite' : 'Add to favorite'} className={favorite.includes(movie.id) ? 'starred' : ''} onClick={() => favorite.includes(movie.id) ? setFavorite(favorite.filter(m => m !== movie.id)) : setFavorite([...favorite, movie.id])}>
+        {'♥︎'}
       </button>
     </div>
   )
@@ -89,7 +89,9 @@ const Search: React.FC = () => {
 
   return (
     <div>
-      <input className="searchInput" onChange={debouncedSetSearch} type="search" placeholder="Search for a movie…" />
+      <div className='searchContainer'>
+        <input className="searchInput" onChange={debouncedSetSearch} type="search" placeholder="Search for a movie…" />
+      </div>
       {loading ? (
         'Loading…'
       ) : error ? (
