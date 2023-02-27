@@ -22,6 +22,22 @@ header h3 {
   margin: 0;
 }
 
+nav a {
+  color: rgba(255,255,255,.7);
+  border-bottom: 3px solid rgba(255,255,255,.7);
+  margin-right: .5rem;
+}
+nav a:hover {
+  color: rgba(255,255,255,.3);
+}
+.active {
+  color: #fff;
+}
+.active:hover {
+  color: #fff;
+  cursor: not-allowed;
+}
+
 @media screen and (max-width: 720px) {
   header {
     height: 100px;
