@@ -48,22 +48,31 @@ const Movie: React.FC<{
   setFavorite: (favorites: number[]) => void}
 > = ({ movie, posterPath, favorite, setFavorite, later, setLater }) => {
   return (
-    <div className="movie-row">
+    <div className="movie">
       {(posterPath && movie.poster_path) ? (
         <img src={`${posterPath}${movie.poster_path}`} />
       ) : <img src="https://via.placeholder.com/100x150?text=" />}
       <div>
-        <h3>{movie.original_title}<span className="year">{truncate(movie.release_date, 4, false)}</span></h3>
-        <Votes average={movie.vote_average} votes={movie.vote_count} />
-        <p>{truncate(movie.overview)}</p>
+        <div className="meta">
+          <h3>{movie.original_title}<span className="year">{truncate(movie.release_date, 4, false)}</span></h3>
+          <Votes average={movie.vote_average} votes={movie.vote_count} />
+
+          <div className="cta">
+            <button title={favorite.includes(movie.id) ? 'Remove from favorite' : 'Add to favorite'} className={['favorite', favorite.includes(movie.id) && 'active'].filter(Boolean).join(' ')} onClick={() => favorite.includes(movie.id) ? setFavorite(favorite.filter(m => m !== movie.id)) : setFavorite([...favorite, movie.id])}>
+              {'♥︎'}
+              <span>{favorite.includes(movie.id) ? 'Remove from favorite' : 'Add to favorite'}</span>
+            </button>
+            <button title={later.includes(movie.id) ? 'Remove from watch list' :  'Add to watch list'} className={['later', later.includes(movie.id) && 'active'].filter(Boolean).join(' ')} onClick={() => later.includes(movie.id) ? setLater(later.filter(m => m !== movie.id)) : setLater([...later, movie.id])}>
+              {later.includes(movie.id) ? '−' : '+'}
+              <span>{later.includes(movie.id) ? 'Remove from watch list' :  'Add to watch list'}</span>
+            </button>
+          </div>
+
+        </div>
+
+        {movie.overview ? <p className="description">{truncate(movie.overview)}</p> :  null}
       </div>
 
-      <button title={later.includes(movie.id) ? 'Remove from watch list' :  'Add to watch list'} className={later.includes(movie.id) ? 'watchLater' : ''} onClick={() => later.includes(movie.id) ? setLater(later.filter(m => m !== movie.id)) : setLater([...later, movie.id])}>
-        {later.includes(movie.id) ? '−' : '+'}
-      </button>
-      <button title={favorite.includes(movie.id) ? 'Remove from favorite' : 'Add to favorite'} className={favorite.includes(movie.id) ? 'starred' : ''} onClick={() => favorite.includes(movie.id) ? setFavorite(favorite.filter(m => m !== movie.id)) : setFavorite([...favorite, movie.id])}>
-        {'♥︎'}
-      </button>
     </div>
   )
 }
@@ -92,7 +101,7 @@ const Search: React.FC = () => {
       <div className='searchContainer'>
         <input className="searchInput" onChange={debouncedSetSearch} type="search" placeholder="Search for a movie…" />
       </div>
-      {loading ? (
+      {search && loading ? (
         'Loading…'
       ) : error ? (
         `Error searching for ${search}`

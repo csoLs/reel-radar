@@ -20,67 +20,113 @@
   outline: none;
 }
 
-.movie-row {
+.movie {
   border: 1px solid rgba(50,50,50,0.2);
   display: flex;
   flex-flow: row nowrap;
   margin: .75rem 0;
   border-radius: 10px;
-  box-shadow: 0 2 8px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.1);
   overflow: hidden;
-  position: relative;
 }
 
-.movie-row button {
-  position: absolute;
-  top: 50%;
-  left: 20px;
+.movie button {
+  color: #ccc;
+  font-weight: 800;
+  font-size: 1.5rem;
   padding: 0;
   background: none;
-  border: none;
+  border: 3px solid rgba(0,0,0,0);
+  margin-right: .5rem;
+  text-align: center;
+  line-height: 1rem;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
 }
-.movie-row button:nth-of-type(2) {
+.movie button:focus {
+  outline: none;
+}
+.later.active {
+  color: #dac526;
+}
+.favorite.active {
+  color: #d34040;
+}
+.later {
   left: 40px;
 }
-.movie-row button:hover {
-  border: 1px solid #ccc;
+.favorite:hover {
+  border: 3px solid #d34040;
+  color: #d34040
+}
+.later:hover {
+  border: 3px solid #dac526;
+  color: #dac526;
+}
+.movie button span {
+  display: none;
 }
 
-.movie-row img {
+.cta {
+  display: inline-block;
+}
+
+.movie img {
   height: 150px;
   width: 100px;
-  border-right: 1px solid rgba(50,50,50,0.2);
 }
 
-.movie-row > div {
+.movie > div {
   padding: .75rem;
 }
 
-.movie-row p,
-.movie-row h3 {
+.movie p,
+.movie h3 {
   margin: 0;
 }
 
-.movie-row .year {
+.movie .year {
   font-size: .8rem;
   margin-left: 1rem;
   color: rgba(100,100,100,0.5);
 }
 
-.movie-row button {
-  color: #ccc;
-  font-weight: 800;
-  font-size: 1.5rem;
-}
-.movie-row button.starred {
-  color: #d34040;
-}
-.movie-row button.watchLater {
-  color: #dac526;
-}
-
 @media screen and (max-width: 720px) {
   .searchContainer {
     top: 100px;
+  }
+
+  .movie {
+    position: relative;
+  }
+
+  .movie img {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .movie .meta {
+    margin-left: 100px;
+    min-height: calc(150px - 1rem);
+  }
+  .description {
+    font-size: .9rem;
+    padding-top: 1rem;
+  }
+
+  .movie button span {
+    margin-left: .5rem;
+    display: inline;
+    font-size: .8rem;
+  }
+
+  .movie button {
+    margin-right: 0;
+    width: auto;
+    border-radius: 10px;
+    padding: 0 .5rem;
+    border-width: 1px !important;
   }
 }
