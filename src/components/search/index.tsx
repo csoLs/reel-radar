@@ -41,7 +41,7 @@ const Search: React.FC = () => {
   )
 
   return (
-    <div>
+    <main>
       <div className='searchContainer'>
         <input className="searchInput" onChange={debouncedSetSearch} type="search" placeholder="Search for a movie…" name="q" />
       </div>
@@ -60,7 +60,7 @@ const Search: React.FC = () => {
           setLater={setWatchLater}
         />
       )) : null}
-    </div>
+    </main>
   )
 }
 
