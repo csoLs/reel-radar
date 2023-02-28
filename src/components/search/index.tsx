@@ -1,5 +1,6 @@
 import React from 'react';
 import useAxios from 'axios-hooks';
+import { useSearchParams } from 'react-router-dom';
 
 import useApiConfig from '../../hooks/api-config'
 import useLocalStorage from '../../hooks/use-local-storage';
@@ -17,8 +18,10 @@ const debounce = (fn: Function, ms = 600) => {
 };
 
 const Search: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get('q') ?? ''
+
   const { data: apiData } = useApiConfig()
-  const [search, setSearch] = React.useState("")
   const [watchLater, setWatchLater] = useLocalStorage<number[]>("watchLater", [])
   const [favorite, setFavorite] = useLocalStorage<number[]>("favorite", [])
 
@@ -29,16 +32,18 @@ const Search: React.FC = () => {
     }
   })
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchParams({q: e.target.value})
+  }
   const debouncedSetSearch = React.useMemo(
     () => debounce(changeHandler),
-    [search]
+    [searchParams]
   )
 
   return (
     <div>
       <div className='searchContainer'>
-        <input className="searchInput" onChange={debouncedSetSearch} type="search" placeholder="Search for a movie…" />
+        <input className="searchInput" onChange={debouncedSetSearch} type="search" placeholder="Search for a movie…" name="q" />
       </div>
       {search && loading ? (
         'Loading…'

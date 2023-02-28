@@ -36,7 +36,7 @@ const Movie: React.FC<{
   setFavorite: (favorites: number[]) => void}
 > = ({ movie, posterPath, favorite, setFavorite, later, setLater }) => {
   return (
-    <div className="movie">
+    <div className="movie" data-test="movie">
       {(posterPath && movie.poster_path) ? (
         <img src={`${posterPath}${movie.poster_path}`} />
       ) : <img src="https://via.placeholder.com/100x150?text=" />}
