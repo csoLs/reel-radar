@@ -27,6 +27,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Add secrets config
+        run: echo "const environment={ACCESS_TOKEN: \""$TMDB_ACCESS_KEY"\"}" > public/settings.js
+        env:
+          TMDB_ACCESS_KEY: ${{ secrets.TMDB_ACCESS_KEY }}
+
       - name: Detect package manager
         id: detect-package-manager
         run: |
@@ -50,12 +55,7 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
-        with:
-          # Automatically inject router.base in your Nuxt configuration file and set
-          # target to static (https://nuxtjs.org/docs/configuration-glossary/configuration-target/).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
-          static_site_generator: nuxt
+
       - name: Restore cache
         uses: actions/cache@v3
         with:
