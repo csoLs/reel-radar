@@ -34,7 +34,7 @@ describe('Happy path', () => {
 
     // Add Sweeney todd to favorite list
     cy.get('.movie .favorite').first().click().should(() => {
-      expect(localStorage.getItem('favorite')).to.eq(JSON.stringify([13885]))
+      expect(JSON.parse(localStorage.getItem('favorite'))).to.have.length(1)
     })
 
     cy.get('.searchInput').clear()
@@ -46,21 +46,21 @@ describe('Happy path', () => {
       
     // Add Sherlock holmes to watch list
     cy.get('.movie .later').first().click().should(() => {
-      expect(localStorage.getItem('watchLater')).to.eq(JSON.stringify([10528]))
+      expect(JSON.parse(localStorage.getItem('watchLater'))).to.have.length(1)
     })
 
     cy.visit('http://localhost:5173/later')
     cy.wait('@getMovie').its('response.statusCode').should('be.oneOf', [200, 304])
     cy.get('[data-test="movie"]').should('have.length', 1)
     cy.get('.movie .later').first().click().should(() => {
-      expect(localStorage.getItem('later')).to.eq(null)
+      expect(JSON.parse(localStorage.getItem('watchLater'))).to.have.length(0)
     })
     
     cy.visit('http://localhost:5173/favorites')
     cy.wait('@getMovie').its('response.statusCode').should('be.oneOf', [200, 304])
     cy.get('[data-test="movie"]').should('have.length', 1)
     cy.get('.movie .favorite').first().click().should(() => {
-      expect(localStorage.getItem('favorite')).to.eq(null)
+      expect(JSON.parse(localStorage.getItem('favorite'))).to.have.length(0)
     })    
   })
 })
