@@ -27,10 +27,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Add secrets config
-        run: echo "const environment={ACCESS_TOKEN: \""$TMDB_ACCESS_KEY"\"}" > public/settings.js
-        env:
-          TMDB_ACCESS_KEY: ${{ secrets.TMDB_ACCESS_KEY }}
+      - name: Inject secret
+        uses: PlasmoHQ/soft-secret@v1
+        with:
+          secret: ${{ secrets.TMDB_ACCESS_KEY }}
+          target: "public/settings.js"
 
       - name: Detect package manager
         id: detect-package-manager
