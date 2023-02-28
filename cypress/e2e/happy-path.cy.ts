@@ -50,14 +50,14 @@ describe('Happy path', () => {
       expect(JSON.parse(localStorage.getItem('watchLater'))).to.have.length(1)
     })
 
-    cy.visit('http://localhost:5173/later')
+    cy.visit('http://localhost:5173/reel-radar/later')
     cy.wait('@getMovie').its('response.statusCode').should('be.oneOf', [200, 304])
     cy.get('[data-test="movie"]').should('have.length', 1)
     cy.get('.movie .later').first().click().should(() => {
       expect(JSON.parse(localStorage.getItem('watchLater'))).to.have.length(0)
     })
     
-    cy.visit('http://localhost:5173/favorites')
+    cy.visit('http://localhost:5173/reel-radar/favorites')
     cy.wait('@getMovie').its('response.statusCode').should('be.oneOf', [200, 304])
     cy.get('[data-test="movie"]').should('have.length', 1)
     cy.get('.movie .favorite').first().click().should(() => {
