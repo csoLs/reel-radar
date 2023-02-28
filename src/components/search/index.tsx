@@ -38,7 +38,7 @@ const Search: React.FC = () => {
   return (
     <div>
       <div className='searchContainer'>
-        <input className="searchInput" onChange={debouncedSetSearch} type="search" placeholder="Search for a movie…" />
+        <input className="searchInput" onChange={debouncedSetSearch} type="search" placeholder="Search for a movie…" name="q" />
       </div>
       {search && loading ? (
         'Loading…'
