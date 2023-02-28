@@ -2,7 +2,7 @@
 
 describe('Happy path', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/')
+    cy.visit('http://localhost:5173/reel-radar/')
     
     // clearLocalStorage() yields the localStorage object
     cy.clearLocalStorage().should((ls) => {

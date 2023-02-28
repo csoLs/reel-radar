@@ -2,7 +2,7 @@
 
 context('Window', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/')
+    cy.visit('http://localhost:5173/reel-radar/')
   })
 
   it('cy.window() - get the global window object', () => {

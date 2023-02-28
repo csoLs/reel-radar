@@ -2,7 +2,7 @@
 
 describe('Viewports', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/')
+    cy.visit('http://localhost:5173/reel-radar/')
   })
 
   it('cy.viewport() - set the viewport size and dimension', () => {

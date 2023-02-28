@@ -13,9 +13,9 @@ const Header: React.FC<{active?: 'favorites' | 'home' | 'watchlist'}> = ({ activ
         <h3>Explore the world of movies</h3>
 
         <nav>
-          <a href="/" className={active === 'home' ? 'active' : ''}>Home</a>
-          <a href="/favorites" className={active === 'favorites' ? 'active' : ''}>Favorites</a>
-          <a href="/later" className={active === 'watchlist' ? 'active' : ''}>Watchlist</a>
+          <a href="/reel-radar/" className={active === 'home' ? 'active' : ''}>Home</a>
+          <a href="/reel-radar/favorites" className={active === 'favorites' ? 'active' : ''}>Favorites</a>
+          <a href="/reel-radar/later" className={active === 'watchlist' ? 'active' : ''}>Watchlist</a>
         </nav>
       </div>
     </div>

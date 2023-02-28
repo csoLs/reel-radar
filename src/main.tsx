@@ -13,16 +13,16 @@ import ErrorPage from './views/error';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/reel-radar/",
     element: <Seach />,
     errorElement: <ErrorPage />
   },
   {
-    path: "/later",
+    path: "/reel-radar/later",
     element: <Later />,
   },
   {
-    path: "/favorites",
+    path: "/reel-radar/favorites",
     element: <Favorites />,
   },
 ]);
