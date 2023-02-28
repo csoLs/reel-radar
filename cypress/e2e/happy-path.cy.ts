@@ -18,12 +18,13 @@ describe('Happy path', () => {
 
     // https://on.cypress.io/type
     cy.get('.searchInput')
-      .type('Sweeney Todd: The Demon barber').should('have.value', 'Sweeney Todd: The Demon barber')
+      .type('Sweeney Todd: The Demon barber')
+      .should('have.value', 'Sweeney Todd: The Demon barber')
     
     // https://on.cypress.io/location
-    // cy.location().should((location) => {
-    //   expect(location.search).to.eq(`q=Sweeney Todd: The Demon barber`)
-    // })
+    cy.location().should((location) => {
+      expect(location.search).to.eq(`?q=Sweeney+Todd%3A+The+Demon+barber`)
+    })
   
     // wait for api to finish loading
     // https://on.cypress.io/wait
