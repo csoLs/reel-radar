@@ -4,7 +4,7 @@ import './header.css'
 
 const Header: React.FC<{active?: 'favorites' | 'home' | 'watchlist'}> = ({ active }) => (
   <header>
-    <div>
+    <div className="container">
       <a href="/">
         <img src="/favicon_io/android-chrome-192x192.png" className="logo" alt="ReelRadar logo" />
       </a>
