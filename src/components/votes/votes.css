@@ -19,3 +19,10 @@
     font-size: .8rem;
   }
 }
+
+@media screen and (max-width: 370px) {
+  .votes {
+    font-size: .5rem;
+    margin: 0;
+  }
+}
