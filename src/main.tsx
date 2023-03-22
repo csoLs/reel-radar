@@ -25,6 +25,11 @@ const router = createBrowserRouter([
     path: "/reel-radar/favorites",
     element: <Favorites />,
   },
+  {
+    path: "/reel-radar/*",
+    element: <ErrorPage />,
+    errorElement: <ErrorPage />
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
