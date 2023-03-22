@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import './header.css'
 
@@ -14,9 +14,9 @@ const Header: React.FC<{active?: 'favorites' | 'home' | 'watchlist'}> = ({ activ
         <h3>Explore the world of movies</h3>
 
         <nav>
-          <Link to="/reel-radar/" className={active === 'home' ? 'active' : ''}>Home</Link>
-          <Link to="/reel-radar/favorites" className={active === 'favorites' ? 'active' : ''}>Favorites</Link>
-          <Link to="/reel-radar/later" className={active === 'watchlist' ? 'active' : ''}>Watchlist</Link>
+          <NavLink to="/reel-radar/">Home</NavLink>
+          <NavLink to="/reel-radar/favorites">Favorites</NavLink>
+          <NavLink to="/reel-radar/later">Watchlist</NavLink>
         </nav>
       </div>
     </div>

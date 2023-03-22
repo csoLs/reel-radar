@@ -5,8 +5,6 @@ import { useQuery } from 'react-query'
 import { useApiConfigFn } from '../../hooks/api-config'
 import useLocalStorage from '../../hooks/use-local-storage';
 
-import Header from '../../components/header';
-import Footer from '../../components/footer';
 import Movie, { IMovie } from '../../components/movie';
 
 const MovieWrapper: React.FC<{
@@ -45,6 +43,7 @@ const MovieWrapper: React.FC<{
     </>
   )
 }
+export { MovieWrapper }
 
 const LaterPage: React.FC = () => {
   const { data: apiData } = useQuery('apiData', useApiConfigFn)
@@ -53,27 +52,20 @@ const LaterPage: React.FC = () => {
 
   return (
     <>
-      <Header active="watchlist" />
-
-      <div className="App">
-        {watchLater.length === 0 ? 'No movies added to watchlist yet!' : !apiData ? 'Loading…' : (
-          <>
-            {watchLater.map(movieId => (
-              <MovieWrapper movieId={movieId} posterPath={`${apiData?.images?.base_url}${apiData?.images?.poster_sizes?.[0]}`} key={movieId}
-              later={watchLater}
-              favorite={favorite}
-              setFavorite={setFavorite}
-              setLater={setWatchLater}
-              />
-            ))}
-          </>
-        )}
-      </div>
-
-      <Footer />
+      {watchLater.length === 0 ? 'No movies added to watchlist yet!' : !apiData ? 'Loading…' : (
+        <>
+          {watchLater.map(movieId => (
+            <MovieWrapper movieId={movieId} posterPath={`${apiData?.images?.base_url}${apiData?.images?.poster_sizes?.[0]}`} key={movieId}
+            later={watchLater}
+            favorite={favorite}
+            setFavorite={setFavorite}
+            setLater={setWatchLater}
+            />
+          ))}
+        </>
+      )}
     </>
   )
 }
 
-export { MovieWrapper }
 export default LaterPage

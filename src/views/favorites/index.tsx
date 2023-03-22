@@ -17,27 +17,21 @@ const FavoritesPage: React.FC = () => {
 
   return (
     <>
-      <Header active="favorites" />
-
-      <div className="App">
-        {favorite.length === 0 ? 'No favorites added yet!' : !apiData ? 'Loading…' : (
-          <>
-            {favorite.map(movieId => (
-              <MovieWrapper
-                movieId={movieId}
-                posterPath={`${apiData?.images?.base_url}${apiData?.images?.poster_sizes?.[0]}`}
-                key={movieId}
-                later={watchLater}
-                favorite={favorite}
-                setFavorite={setFavorite}
-                setLater={setWatchLater}
-              />
-            ))}
-          </>
-        )}
-      </div>
-
-      <Footer />
+      {favorite.length === 0 ? 'No favorites added yet!' : !apiData ? 'Loading…' : (
+        <>
+          {favorite.map(movieId => (
+            <MovieWrapper
+              movieId={movieId}
+              posterPath={`${apiData?.images?.base_url}${apiData?.images?.poster_sizes?.[0]}`}
+              key={movieId}
+              later={watchLater}
+              favorite={favorite}
+              setFavorite={setFavorite}
+              setLater={setWatchLater}
+            />
+          ))}
+        </>
+      )}
     </>
   )
 }

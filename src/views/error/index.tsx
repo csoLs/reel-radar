@@ -1,8 +1,5 @@
 import { useRouteError } from "react-router-dom";
 
-import Header from '../../components/header';
-import Footer from '../../components/footer';
-
 interface IError {
   statusText: string;
   message: string;
@@ -19,17 +16,11 @@ const ErrorPage = () => {
 
   return (
     <>
-      <Header />
-
-      <div className="App">
-        <h1>Oops!</h1>
-        <p>Sorry, an unexpected error has occurred.</p>
-        <p>
-          <i>{isError(error) ? (error.statusText || error.message) : ''}</i>
-        </p>
-      </div>
-
-      <Footer />
+      <h1>Oops!</h1>
+      <p>Sorry, an unexpected error has occurred.</p>
+      <p>
+        <i>{isError(error) ? (error.statusText || error.message) : ''}</i>
+      </p>
     </>
   );
 }
