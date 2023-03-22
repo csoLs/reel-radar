@@ -40,4 +40,10 @@ const useApiConfig = () => {
   return { data, error, loaded };
 };
 
+const useApiConfigFn = () =>
+  fetch('https://api.themoviedb.org/3/configuration', { headers: { authorization: `Bearer ${environment.ACCESS_TOKEN}` } }).then(res =>
+    res.json()
+  )
+
+export { useApiConfigFn }
 export default useApiConfig

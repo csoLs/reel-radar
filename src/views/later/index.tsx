@@ -1,7 +1,8 @@
 import React from 'react'
 import useAxios from 'axios-hooks';
+import { useQuery } from 'react-query'
 
-import useApiConfig from '../../hooks/api-config'
+import { useApiConfigFn } from '../../hooks/api-config'
 import useLocalStorage from '../../hooks/use-local-storage';
 
 import Header from '../../components/header';
@@ -46,7 +47,7 @@ const MovieWrapper: React.FC<{
 }
 
 const LaterPage: React.FC = () => {
-  const { data: apiData } = useApiConfig()
+  const { data: apiData } = useQuery('apiData', useApiConfigFn)
   const [watchLater, setWatchLater] = useLocalStorage<number[]>("watchLater", [])
   const [favorite, setFavorite] = useLocalStorage<number[]>("favorite", [])
 
@@ -55,7 +56,7 @@ const LaterPage: React.FC = () => {
       <Header active="watchlist" />
 
       <div className="App">
-        {watchLater.length === 0 ? 'No movies added to watchlist yet!' : (
+        {watchLater.length === 0 ? 'No movies added to watchlist yet!' : !apiData ? 'Loading…' : (
           <>
             {watchLater.map(movieId => (
               <MovieWrapper movieId={movieId} posterPath={`${apiData?.images?.base_url}${apiData?.images?.poster_sizes?.[0]}`} key={movieId}

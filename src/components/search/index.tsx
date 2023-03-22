@@ -1,8 +1,9 @@
 import React from 'react';
 import useAxios from 'axios-hooks';
 import { useSearchParams } from 'react-router-dom';
+import { useQuery } from 'react-query'
 
-import useApiConfig from '../../hooks/api-config'
+import { useApiConfigFn } from '../../hooks/api-config'
 import useLocalStorage from '../../hooks/use-local-storage';
 
 import Movie, { IMovie } from '../movie';
@@ -21,7 +22,8 @@ const Search: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('q') ?? ''
 
-  const { data: apiData } = useApiConfig()
+  const { data: apiData } = useQuery('apiData', useApiConfigFn)
+
   const [watchLater, setWatchLater] = useLocalStorage<number[]>("watchLater", [])
   const [favorite, setFavorite] = useLocalStorage<number[]>("favorite", [])
 
@@ -49,7 +51,7 @@ const Search: React.FC = () => {
         'Loading…'
       ) : error ? (
         `Error searching for ${search}`
-      ) : search != '' && (data?.results ?? []).length > 0 ? (data?.results ?? []).map((movie) => (
+      ) : search != '' && apiData && (data?.results ?? []).length > 0 ? (data?.results ?? []).map((movie) => (
         <Movie
           key={movie.id}
           movie={movie}

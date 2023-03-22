@@ -1,6 +1,7 @@
 import React from 'react'
+import { useQuery } from 'react-query'
 
-import useApiConfig from '../../hooks/api-config'
+import { useApiConfigFn } from '../../hooks/api-config'
 import useLocalStorage from '../../hooks/use-local-storage';
 
 import Header from '../../components/header';
@@ -10,7 +11,7 @@ import { MovieWrapper } from '../later';
 
 
 const FavoritesPage: React.FC = () => {
-  const { data: apiData } = useApiConfig()
+  const { data: apiData } = useQuery('apiData', useApiConfigFn)
   const [watchLater, setWatchLater] = useLocalStorage<number[]>("watchLater", [])
   const [favorite, setFavorite] = useLocalStorage<number[]>("favorite", [])
 
@@ -19,7 +20,7 @@ const FavoritesPage: React.FC = () => {
       <Header active="favorites" />
 
       <div className="App">
-        {favorite.length === 0 ? 'No favorites added yet!' : (
+        {favorite.length === 0 ? 'No favorites added yet!' : !apiData ? 'Loading…' : (
           <>
             {favorite.map(movieId => (
               <MovieWrapper
