@@ -1,4 +1,5 @@
 import React from 'react';
+import useAxios from 'axios-hooks';
 
 import Votes from '../votes';
 
@@ -64,5 +65,43 @@ const Movie: React.FC<{
     </div>
   )
 }
+
+const MovieWrapper: React.FC<{
+  movieId: number,
+  posterPath: string
+  later: number[],
+  favorite: number[],
+  setLater: (later: number[]) => void,
+  setFavorite: (favorites: number[]) => void
+}> = ({ movieId, posterPath, later, favorite, setLater, setFavorite }) => {
+  const [{ loading, error, data: movie }] = useAxios<IMovie>({
+    url: `https://api.themoviedb.org/3/movie/${movieId}`,
+    headers: {
+      authorization: `Bearer ${environment.ACCESS_TOKEN}`
+    }
+  })
+
+  return (
+    <>
+      {loading
+      ? 'Loading'
+      : error
+        ? null
+        : movie
+          ? (
+            <Movie
+              key={movie.id}
+              movie={movie}
+              posterPath={posterPath}
+              later={later}
+              favorite={favorite}
+              setFavorite={setFavorite}
+              setLater={setLater}
+          />
+        ) : null}
+    </>
+  )
+}
+export { MovieWrapper }
 
 export default Movie

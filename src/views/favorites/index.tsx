@@ -4,11 +4,7 @@ import { useQuery } from 'react-query'
 import { useApiConfigFn } from '../../hooks/api-config'
 import useLocalStorage from '../../hooks/use-local-storage';
 
-import Header from '../../components/header';
-import Footer from '../../components/footer';
-
-import { MovieWrapper } from '../later';
-
+import { MovieWrapper } from '../../components/movie';
 
 const FavoritesPage: React.FC = () => {
   const { data: apiData } = useQuery('apiData', useApiConfigFn)

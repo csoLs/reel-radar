@@ -1,49 +1,10 @@
 import React from 'react'
-import useAxios from 'axios-hooks';
 import { useQuery } from 'react-query'
 
 import { useApiConfigFn } from '../../hooks/api-config'
 import useLocalStorage from '../../hooks/use-local-storage';
 
-import Movie, { IMovie } from '../../components/movie';
-
-const MovieWrapper: React.FC<{
-  movieId: number,
-  posterPath: string
-  later: number[],
-  favorite: number[],
-  setLater: (later: number[]) => void,
-  setFavorite: (favorites: number[]) => void
-}> = ({ movieId, posterPath, later, favorite, setLater, setFavorite }) => {
-  const [{ loading, error, data: movie }] = useAxios<IMovie>({
-    url: `https://api.themoviedb.org/3/movie/${movieId}`,
-    headers: {
-      authorization: `Bearer ${environment.ACCESS_TOKEN}`
-    }
-  })
-
-  return (
-    <>
-      {loading
-      ? 'Loading'
-      : error
-        ? null
-        : movie
-          ? (
-            <Movie
-              key={movie.id}
-              movie={movie}
-              posterPath={posterPath}
-              later={later}
-              favorite={favorite}
-              setFavorite={setFavorite}
-              setLater={setLater}
-          />
-        ) : null}
-    </>
-  )
-}
-export { MovieWrapper }
+import { MovieWrapper } from '../../components/movie';
 
 const LaterPage: React.FC = () => {
   const { data: apiData } = useQuery('apiData', useApiConfigFn)
