@@ -4,31 +4,49 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from 'react-query'
 
-import Seach from './views/search'
-import Favorites from './views/favorites'
-import Later from './views/later'
+import SearchView from './views/search'
+import FavoritesView from './views/favorites'
+import WatchLaterView from './views/later'
 import './index.css'
 import ErrorPage from './views/error';
 
+import Layout from './components/layout';
+
 const router = createBrowserRouter([
   {
-    path: "/reel-radar/",
-    element: <Seach />,
-    errorElement: <ErrorPage />
-  },
-  {
-    path: "/reel-radar/later",
-    element: <Later />,
-  },
-  {
-    path: "/reel-radar/favorites",
-    element: <Favorites />,
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: "/reel-radar/",
+        element: <SearchView />,
+        errorElement: <ErrorPage />
+      },
+      {
+        path: "/reel-radar/later",
+        element: <WatchLaterView />,
+      },
+      {
+        path: "/reel-radar/favorites",
+        element: <FavoritesView />,
+      },
+      {
+        path: "/reel-radar/*",
+        element: <ErrorPage />,
+        errorElement: <ErrorPage />
+      },
+    ]
   },
 ]);
 
+const queryClient = new QueryClient()
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>,
 )
